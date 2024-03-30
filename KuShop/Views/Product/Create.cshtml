@@ -1,0 +1,88 @@
+﻿@model KuShop.Models.Game
+
+@{
+    ViewData["Title"] = "Create";
+}
+@if(ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.ErrorMessage;
+    </div>
+}
+
+<h1>Create</h1>
+
+<h4>Product</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <!--form ที่สร้างเมื่อ Submit จะไปทำงานที่ Action Create
+            แต่การส่งจาก Form โดยปกติจะเป็นการส่งข้อมูลแบบ Post
+        -->
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="GameId" class="control-label"></label>
+                <input asp-for="GameId" class="form-control" />
+                <span asp-validation-for="GameId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GameName" class="control-label"></label>
+                <input asp-for="GameName" class="form-control" />
+                <span asp-validation-for="GameName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GenreId" class="control-label"></label>
+                <!-- <input asp-for="PdtId" class="form-control" />-->
+                <!-- ViewData กับ ViewBag สลับการแสดงผลได้ แต่การแสดงบน View ใช้ ViewBag สะดวกกว่า-->
+                <select asp-for="GenreId" class="form-select" asp-items="ViewBag.Pdt"></select>
+                <span asp-validation-for="GenreId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DevId" class="control-label"></label>
+                <!--<input asp-for="BrandId" class="form-control" /> -->
+                <!-- ViewData กับ ViewBag สลับการแสดงผลได้ แต่การแสดงบน View ใช้ ViewBag สะดวกกว่า-->
+                <select asp-for="DevId" class="form-select" asp-items="ViewBag.Brand"></select>
+                <span asp-validation-for="DevId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GamePrice" class="control-label"></label>
+                <input asp-for="GamePrice" class="form-control" />
+                <span asp-validation-for="GamePrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShareCost" class="control-label"></label>
+                <input asp-for="ShareCost" class="form-control" />
+                <span asp-validation-for="ShareCost" class="text-danger"></span>
+            </div>
+            <!--
+            <div class="form-group">
+                <label asp-for="PdStk" class="control-label"></label>
+                <input asp-for="PdStk" class="form-control" />
+                <span asp-validation-for="PdStk" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PdLastBuy" class="control-label"></label>
+                <input asp-for="PdLastBuy" class="form-control" />
+                <span asp-validation-for="PdLastBuy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PdLastSale" class="control-label"></label>
+                <input asp-for="PdLastSale" class="form-control" />
+                <span asp-validation-for="PdLastSale" class="text-danger"></span>
+            </div>
+            -->
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
